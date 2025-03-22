@@ -60,7 +60,7 @@
 
 <script>
 import { useQuery } from '@vue/apollo-composable';
-import { GET_PROJECTS } from '../graphql/getprojects.js';
+import { GET_PROJECTS } from '@/graphql/getprojects.js';
 import { ref, watchEffect } from 'vue';
 import { useNavigation } from '../utils/navigation.js'; 
 

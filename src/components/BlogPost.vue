@@ -73,7 +73,7 @@
 <script>
 import { ref, watchEffect, watch, onMounted } from 'vue';
 import { useQuery } from '@vue/apollo-composable';
-import { GET_ONE_POST } from '../graphql/getOnePost.js';
+import { GET_ONE_POST } from '@/graphql/getOnePost.js';
 import { useRoute, useRouter } from 'vue-router';
 import { useNavigation } from "../utils/navigation.js";
 

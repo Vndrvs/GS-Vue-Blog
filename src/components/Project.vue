@@ -75,7 +75,7 @@
 <script>
 import { ref, watchEffect, computed } from "vue";
 import { useQuery } from "@vue/apollo-composable";
-import { GET_ONE_PROJECT } from "../graphql/getOneProject";
+import { GET_ONE_PROJECT } from "@/graphql/getOneProject";
 import { useRoute } from "vue-router";
 import { useNavigation } from "../utils/navigation.js";
 

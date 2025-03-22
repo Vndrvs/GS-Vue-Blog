@@ -48,7 +48,7 @@
 
 <script>
 import { useQuery } from '@vue/apollo-composable';
-import { GET_POSTS } from '../graphql/getposts.js';
+import { GET_POSTS } from '@/graphql/getposts.js';
 import { ref, watchEffect, onMounted } from 'vue';
 
 export default {
