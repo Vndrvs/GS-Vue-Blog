@@ -1,0 +1,61 @@
+@use "@/styles/element/mixins" as *;
+@import "@/styles/element/headline.scss";
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Geist+Mono:wght@100..900&family=Handjet:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+:root {
+    --heading-font: 'Montserrat', sans-serif;
+    --body-font: 'Urbanist', serif;
+    --alter-font: 'Inter';
+}
+
+:root.light {
+    --base-clr: rgba(190, 190, 190, 0.851);
+    --base-2-clr: rgba(66, 66, 66, 0.983);
+    --line-clr: rgba(43, 43, 125, 0.525);
+    --btn-clr: rgb(131, 135, 229);
+    --hover-clr: #222533;
+    --text-clr: rgb(0, 0, 0);
+    --secondary-text-clr: rgb(255, 255, 255);
+    --accent-clr: #6c6fce;
+    --container-clr: rgb(104, 104, 104);
+    --shadow-clr: rgb(0, 203, 243);
+    --accent-shadow-clr: rgba(103, 12, 214, 0.752);
+    --button-1: var(--accent-clr);
+    --button-2: #5c42ef;
+    --button-3: var(--accent-clr);
+    --button-4: #008cff;
+    --button-5: var(--accent-clr);
+    --button-6: #6942ef;
+}
+
+:root.dark {
+    --base-clr: rgb(47, 47, 56);
+    --line-clr: rgb(221, 221, 234);
+    --btn-clr: rgb(220, 240, 44);
+    --hover-clr: rgb(35, 38, 55);
+    --text-clr: rgb(221, 221, 234);
+    --secondary-text-clr: rgb(0, 0, 0);
+    --accent-clr: rgb(219, 204, 46);
+    --container-clr: rgba(0, 0, 0, 0.229);
+    --shadow-clr: rgba(103, 12, 214, 0.752);
+    --accent-shadow-clr: rgb(0, 203, 243);
+    --button-1: #ffff72;
+    --button-2: #ffd000;
+    --button-3: #dddd00;
+    --button-4: #cfc100;
+    --button-5: #ffff72;
+    --button-6: #ffd000;
+}
+
+h1, h2 {
+    font-family: var(--heading-font);
+}
+
+h3, h4, p {
+    font-family: var(--body-font);
+}
+
+body {
+    background-color: var(--base-clr);
+}

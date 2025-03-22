@@ -1,0 +1,24 @@
+@mixin font-style($font-family, $weight, $size, $line-height, $text-decoration, $color) {
+    font-family: $font-family;
+    font-weight: $weight;
+    font-size: $size;
+    line-height: $line-height;
+    text-decoration: $text-decoration;
+    color: $color;
+}
+
+@mixin container-style($display, $margin, $padding, $width, $height) {
+    display: $display;
+    margin: $margin;
+    padding: $padding;
+    width: $width;
+    height: $height;
+}
+
+@mixin responsive-text($width, $word-break, $hyphens, $overflow, $text-overflow) {
+    width: $width;
+    word-break: $word-break;
+    hyphens: $hyphens;
+    overflow: $overflow;
+    text-overflow: $text-overflow;
+}
