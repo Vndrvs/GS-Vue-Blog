@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "check-path": "node -e 'console.log(process.cwd())'"
   },
   "dependencies": {
     "@apollo/client": "^3.13.2",
