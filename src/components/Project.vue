@@ -91,8 +91,8 @@ export default {
       documentId: documentId,
     });
     
-    const project = ref(null); // Changed from computed to ref
-    const posts = ref([]); // Changed from computed to ref
+    const project = ref(null);
+    const posts = ref([]);
     
     const parseContent = (content) => {
       if (!content || content.length === 0) return '';
@@ -113,10 +113,10 @@ export default {
     watchEffect(() => {
       if (result.value) {
         if (result.value.project) {
-          project.value = result.value.project; // This is now allowed because project is a ref
+          project.value = result.value.project;
         }
         if (result.value?.project?.blog_posts) {
-          posts.value = result.value.project.blog_posts; // This is now allowed because posts is a ref
+          posts.value = result.value.project.blog_posts;
         } else {
           posts.value = [];
         }
