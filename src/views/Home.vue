@@ -54,9 +54,10 @@ import { ref, watchEffect, onMounted } from 'vue';
 export default {
   name: 'PostsView',
   setup() {
-    const { result, loading, error } = useQuery(GET_POSTS, { fetchPolicy: 'no-cache' });
     
+    const { result, loading, error } = useQuery(GET_POSTS, { fetchPolicy: 'no-cache' });
     const posts = ref([]);
+
     const arrowsCount = ref(0);
     
     const calcArrowsCount = (width) => {
@@ -67,13 +68,11 @@ export default {
       arrowsCount.value = calcArrowsCount(window.innerWidth);
     };
     
-    
     onMounted(() => {
       const width = window.innerWidth;
       arrowsCount.value = calcArrowsCount(width);
       window.addEventListener('resize', updateArrowsCount);
     });
-    
     
     watchEffect(() => {
   if (result.value && result.value.blogPosts) {

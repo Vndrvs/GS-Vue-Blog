@@ -22,7 +22,7 @@
   </div>
   
   <el-collapse-transition>
-    <div v-if="!isCollapse">
+    <div v-show="!isCollapse">
       <el-menu-item v-if="!isHome" index="home" class="sidebar-item">
         <span :class="{ 'fade-out': isCollapse }" @click="navbarClicked"><router-link to="/">BLOG</router-link></span>
       </el-menu-item>
@@ -60,14 +60,12 @@ const posts = computed(() => result.value?.blogPosts || []);
 
 const goToRandomPost = () => {
   if (loading.value || error.value || !posts.value.length) return;
-
+  
   const randomIndex = Math.floor(Math.random() * posts.value.length);
   const randomPost = posts.value[randomIndex];
-
+  
   if (randomPost && randomPost.documentId) {
-    router.replace(`/blog/${randomPost.documentId}`).then(() => {
-      window.location.reload(); // Forces the page to reload after navigating
-    });
+    router.push(`/blog/${randomPost.documentId}`);
   }
 };
 
@@ -222,6 +220,7 @@ onMounted(() => {
     opacity: 0.8;
   }
 }
+
 
 @media (max-width: 900px) { 
   

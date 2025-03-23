@@ -71,14 +71,20 @@
 </template>
 
 <script>
-import { ref, watchEffect, watch, onMounted } from 'vue';
+import { ref, watchEffect, watch } from 'vue';
 import { useQuery } from '@vue/apollo-composable';
 import { GET_ONE_POST } from '@/graphql/getOnePost.js';
 import { useRoute, useRouter } from 'vue-router';
 import { useNavigation } from "../utils/navigation.js";
 
 export default {
-  setup() {
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
     const route = useRoute();
     const router = useRouter();
     const documentId = ref(route.params.id);
@@ -86,8 +92,9 @@ export default {
     const { goBackUsingBack, goToHome } = useNavigation();
     const post = ref(null);
 
-    const { result, loading, error } = useQuery(GET_ONE_POST, {
-      documentId: documentId.value,
+    const { result, loading, error, refetch } = useQuery(GET_ONE_POST, {
+      documentId: props.id, // Use the prop directly
+      fetchPolicy: "network-only",
     });
 
     watchEffect(() => {
@@ -95,47 +102,51 @@ export default {
         post.value = result.value.blogPost;
       }
     });
-    watch(() => route.params.id, (newId) => {
-      documentId.value = newId;
+
+    watch(() => props.id, (newId) => {
+      documentId.value = newId; // Update documentId
+      // Re-fetch the query
+      refetch({ documentId: newId });
     });
 
     const escapeHtml = (str) => {
-  return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-};
+      return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    };
 
-const parseContent = (content) => {
-  if (!content) return "";
+    const parseContent = (content) => {
+      if (!content) return "";
 
-  if (Array.isArray(content)) {
-    let fullText = content
-      .map((block) => block.children.map((child) => child.text).join(""))
-      .join("\n");
+      if (Array.isArray(content)) {
+        let fullText = content
+          .map((block) => block.children.map((child) => child.text).join(""))
+          .join("\n");
 
-    fullText = fullText.replace(
-      /'''\s*([\s\S]*?)\s*'''/gs,
-      (match, codeContent) => {
-        const escapedCode = escapeHtml(codeContent);
-        return `<pre><code class="custom-code">${escapedCode}</code></pre>`;
+        fullText = fullText.replace(
+          /'''\s*([\s\S]*?)\s*'''/gs,
+          (match, codeContent) => {
+            const escapedCode = escapeHtml(codeContent);
+            return `<pre><code class="custom-code">${escapedCode}</code></pre>`;
+          }
+        );
+
+        return fullText;
       }
-    );
 
-    return fullText;
-  }
+      if (typeof content === "string") {
+        let formattedContent = content.replace(
+          /'''\s*([\s\S]*?)\s*'''/gs,
+          (match, codeContent) => {
+            const escapedCode = escapeHtml(codeContent);
+            return `<pre><code class="custom-code">${escapedCode}</code></pre>`;
+          }
+        );
 
-  if (typeof content === "string") {
-    let formattedContent = content.replace(
-      /'''\s*([\s\S]*?)\s*'''/gs,
-      (match, codeContent) => {
-        const escapedCode = escapeHtml(codeContent);
-        return `<pre><code class="custom-code">${escapedCode}</code></pre>`;
+        return formattedContent;
       }
-    );
 
-    return formattedContent;
-  }
+      return content;
+    };
 
-  return content;
-};
     const formatDate = (dateString) => {
       if (!dateString) return '';
       const date = new Date(dateString);
