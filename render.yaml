@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: gs-vue-blog
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm run start
+    routes:
+      - source: "/(.*)"
+        destination: "/index.html"
