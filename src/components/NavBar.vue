@@ -126,8 +126,8 @@ onMounted(() => {
   position: sticky;
   top: 0;
   align-self: start;
-  transition: width 600ms ease border-right 0.3s ease;;
-  overflow: hidden;
+  transition: width 600ms ease, border-right 0.3s ease;
+  overflow: auto;
   border-right: 0 solid transparent;
   margin-top: 17px;
   
@@ -159,6 +159,7 @@ onMounted(() => {
     border: 2px solid var(--text-clr);
     cursor: pointer;
     pointer-events: auto;
+    transition: right 0.3s ease;
   }
   
   & .toggle-button-item {
@@ -179,23 +180,13 @@ onMounted(() => {
   & .fade-out {
     border-bottom: none;
     opacity: 0;
-    transition: opacity 0.3s ease border-bottom 0.3s ease;
+    transition: opacity 0.3s ease, border-bottom 0.3s ease;
   }
   
   & .sidebar-item {
     transition: opacity 0.3s ease;
   }
 
-  #toggle-button {
-    flex-shrink: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid var(--text-clr);
-    cursor: pointer;
-    pointer-events: auto;
-  }
-  
   & .theme-btn {
     width: 50px;
     height: 50px;
@@ -221,13 +212,11 @@ onMounted(() => {
   }
 }
 
-
 @media (max-width: 900px) { 
-  
   #sidebar {
     display: inline-block;
     margin: auto;
-    transition: width 1000ms ease border-right 1s ease;
+    transition: width 1000ms ease, border-right 1s ease;
     margin-top: 9px;
 
     .el-menu-item {
@@ -275,7 +264,7 @@ onMounted(() => {
     & .fade-out {
       border-bottom: none;
       opacity: 0;
-      transition: opacity 0.3s ease border-bottom 0.3s ease;
+      transition: opacity 0.3s ease, border-bottom 0.3s ease;
     }
     
     & .sidebar-item {
@@ -294,5 +283,4 @@ onMounted(() => {
     }
   }
 }
-
 </style>
