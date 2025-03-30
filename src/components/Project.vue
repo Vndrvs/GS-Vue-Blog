@@ -34,7 +34,7 @@
   <div class="blogposts-area">
     <div v-if="!loading && posts && posts.length">
       <h2 id="blogposts-title">Related Blog Posts</h2>
-      <el-row :gutter="20" class="card-container">
+      <el-row :gutter="20" justify="center" class="card-container">
         <template v-for="(blog_post, index) in posts" :key="blog_post.documentId" class="blogposts-container">
           <router-link :to="`/blog/${blog_post.documentId}`" class="blogpost-link">
             <div class="blogpost-container">
@@ -47,29 +47,33 @@
                   <div class="blogpost-heading-container">
                     <h3>{{ blog_post.H1 }}</h3>
                   </div>
-                  <div v-if="project.technologies && project.technologies.length" class="blogpost-tech-icons">
-                    <span v-for="tech in project.technologies" :key="tech.technologyName" class="blogpost-icons-span">
-                      <img
-                      v-if="tech.technologyIcon"
-                      class="blogpost-tech-icon"
-                      :src="tech.technologyIcon.url"
-                      :alt="tech.technologyIcon.alternativeText"
-                      />
-                    </span>
-                  </div>
                 </div>
               </div>
               <div class="blogpost-images-container">
                 <div v-if="blog_post.Cover" class="blogpost-bubble-cover">
                   <img class="blogpost-cover-image" :src="blog_post.Cover.url" :alt="blog_post.Cover.alternativeText" />
                 </div>
+                <div v-if="blog_post.technologies && blog_post.technologies.length" class="blogpost-tech-icons">
+                  <span 
+                  v-for="tech in blog_post.technologies" 
+                  :key="tech.technologyName" 
+                  class="blogpost-icons-span"
+                  >
+                  <img
+                  v-if="tech.technologyIcon"
+                  class="blogpost-tech-icon"
+                  :src="tech.technologyIcon.url"
+                  :alt="tech.technologyIcon.alternativeText"
+                  />
+                </span>
               </div>
             </div>
-          </router-link>
-        </template>
-      </el-row>
-    </div>
+          </div>
+        </router-link>
+      </template>
+    </el-row>
   </div>
+</div>
 </template>
 
 <script>
@@ -146,9 +150,7 @@ export default {
 }
 
 .project-content-container {
-  width: 80%;
   display: flex;
-  margin: 0 auto 0 auto;
   
   & h1, h2, p {
     margin: 0 auto 0 auto;
@@ -177,6 +179,7 @@ export default {
   & .cover-image {
     margin: 3%;
     width: 45%;
+    max-width: 400px;
   }
 }
 
@@ -184,6 +187,9 @@ export default {
   text-decoration: none; 
   margin: auto;
 }
+
+/* ------------------------------ */
+/* Blogpost cards */
 
 .blogposts-area {
   width: 90%;
@@ -195,94 +201,107 @@ export default {
   }
   
   & .card-container {
+    column-gap: 50px;
     row-gap: 5vh;
-    column-gap: 6vw;
   }
   
   & .blogpost-container {
-    @include container-style(grid, auto, 1.1rem, 330px, 180px);
+    @include container-style(grid, auto, 1.4rem, 330px, 130px);
+    align-items: center;
     overflow: hidden;
-    border-radius: 14px;
+    border-radius: 1.9rem;
     border: 1px solid var(--text-clr);
     grid-template-columns: 2fr 1fr;
+    background-image: linear-gradient(
+    150deg,
+    var(--text-clr / 80%) 0%,
+    var(--secondary-text-clr / 10%) 80%
+    );
     
-    & .blogpost-icons-span {
-      max-height: 24px;
+    &:hover {
+      transition: 0.4s ease;
+      box-shadow: var(--accent-shadow-clr) 1px 8px 20px;
     }
     
-    & .blogpost-tech-icons {
-      @include container-style(flex, 0, 2px, 80px, auto);
-      max-height: 30%;
-      gap: 10spx;
-      
-      & .blogpost-tech-icon {
-        width: auto;
-        max-height: 25px;
-        height: auto;
-      }
+    & .el-column {
+      display: flex;
+      justify-content: center;
     }
     
     & .blogpost-images-container {
-      margin: 28px 0 0 280px;
-      position: absolute;
+      max-width: 100px;
+      margin-left: 20px;
       
       & .blogpost-cover-image {
-        border-radius: 20px;
-        width: 120px;
+        width: 90px;
+        border-radius: 0.8rem;
+      }
+      
+      & .blogpost-tech-icons {
+        @include container-style(flex, 4px 0 -10px 0, 2px, 87px, auto);
+        max-height: 30%;
+        border-radius: 0.4rem;
+        border: 0.5px solid var(--text-clr);
+        gap: 2px;
+        
+        & .blogpost-icons-span {
+          max-height: 24px;
+        }
+        
+        & .blogpost-tech-icon {
+          max-height: 23px;
+          margin-left: 3px;
+        }
       }
     }
     
     & .blogpost-bubble {
+      display: flex;
       text-align: left;
       
       & .blogpost-bubble-content {
-        @include container-style(flex, 0, 0, 270px, auto);
+        margin: auto;
+        display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
       }
       
       & p {
+        font-size: 13px;
         color: var(--text-clr);      
       }
       
       & h2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+        overflow: hidden;
         @include font-style(var(--heading-font), 700, 1.4em, 100%, none, var(--text-clr));
       }
       
       & .blogpost-heading-container {
-        padding: 8px 0 0 0;
-        width: 250px;
-        border-top: 1.4px solid lightgrey;        
+        padding-top: 3px;
+        border-top: 1.4px solid var(--text-clr);
+        min-width: 160px;
       }
       
       & h3 {
-        @include font-style(var(--body-font), 400, 1rem, 100%, none, var(--text-clr));
-      }
-    }
-  }
-  
-  & .blogpost-container:hover {
-    transition: 0.4s ease;
-    box-shadow: var(--accent-shadow-clr) 1px 8px 20px;
-    
-    & .blogpost-images-container {
-      margin: 28px 0 0 280px;
-      position: absolute;
-      transition: 0.4s ease;
-      
-      & .blogpost-cover-image {
-        border-radius: 20px;
-        transition: 0.4s ease;
-        width: 120px;
-        box-shadow: var(--accent-shadow-clr) 1px 8px 20px;
-        
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+        overflow: hidden;
+        @include font-style(var(--body-font), 400, 15px, 130%, none, var(--text-clr));
       }
     }
   }
 }
 
 @media (max-width: 900px) {
-
+  
   .project-content-container {
     max-width: 90%;
     margin: auto;
@@ -331,7 +350,7 @@ export default {
       color: var(--text-clr);
       max-width: 80%;
     }
-
+    
     & p {
       line-height: 140%;
     }
@@ -349,6 +368,146 @@ export default {
       color: var(--secondary-txt-clr);
     }
   }
+  
+  .blogposts-area {
+    
+    #blogposts-title {
+      margin: 5%;
+      @include font-style(var(--heading-font), 700, 2.2rem, 100%, none, var(--text-clr));
+    }
+    
+    & .card-container {
+      row-gap: 5vh;
+      column-gap: 6vw;
+    }
+    
+    & .blogpost-container {
+      @include container-style(grid, auto, 1.4rem, 330px, 120px);
+      align-items: center;
+      overflow: hidden;
+      border-radius: 1.9rem;
+      border: 1px solid var(--text-clr);
+      grid-template-columns: 2fr 1fr;
+      background-image: linear-gradient(
+      150deg,
+      var(--text-clr / 80%) 0%,
+      var(--secondary-text-clr / 10%) 80%
+      );
+      
+      & .blogpost-icons-span {
+        max-height: 24px;
+      }
+      
+      & .blogpost-tech-icons {
+        @include container-style(flex, 0, 2px, 80px, auto);
+        max-height: 30%;
+        gap: 10px;
+        
+        & .blogpost-tech-icon {
+          width: auto;
+          max-height: 25px;
+          height: auto;
+        }
+      }
+      
+      & .blogpost-bubble {
+        & .blogpost-bubble-content {
+          @include container-style(flex, 0, 0, 230px, auto);
+        }
+        & .blogpost-heading-container {
+          width: 220px;
+        }
+      }
+    }
+    
+    & .blogpost-container:hover {
+      & .blogpost-images-container {
+        margin: 28px 0 0 230px;
+      }
+    }
+  }
 }
+
+@media (max-width: 670px) {
+  
+  .blogposts-area .blogpost-container {
+    display: flex;
+    flex-direction: column; /* Stack image above text */
+    align-items: center;
+    text-align: center;
+    border: 1px solid var(--text-clr);
+    border-radius: 14px;
+    overflow: hidden;
+    padding: 10px;
+  }
+  
+  .blogposts-area .blogpost-images-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+    position: relative !important;
+  }
+  
+  .blogposts-area .blogpost-cover-image {
+    max-width: 100%;
+    width: 80%;
+    border-radius: 14px;
+  }
+  
+  .blogposts-area .blogpost-bubble {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .blogposts-area .blogpost-bubble-content {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+/*
+@media (max-width: 650px) {
+.blogpost-container {
+display: flex !important;
+flex-direction: column !important;  // Stack content vertically
+align-items: center !important;  // Center everything
+text-align: center !important;
+width: 56vw !important;
+border: 1px solid var(--text-clr) !important;
+border-radius: 14px !important;
+overflow: hidden !important;
+padding: 10px !important;
+height: 300px !important;
+font-size: 0.8rem;
+}
+
+.blogpost-images-container {
+width: 50vw !important;  // Take full width
+display: flex !important;
+justify-content: center !important;
+margin: 10px 0 0 0 !important;  // Remove weird margins
+position: relative !important;  // Remove absolute positioning if any
+}
+
+.blogpost-cover-image {
+width: 56vw !important; // Make sure the image resizes properly
+max-width: 250px !important; // Adjust based on preference
+border-radius: 14px !important;
+}
+
+.blogpost-bubble {
+width: 56vw !important;
+display: flex !important;
+flex-direction: column !important;
+align-items: center !important;
+text-align: center !important;
+}
+
+.blogpost-bubble-content {
+width: 56vw !important;
+}
+}
+*/
 
 </style>

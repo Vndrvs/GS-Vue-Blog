@@ -28,6 +28,13 @@ export const GET_ONE_PROJECT = gql`
             alternativeText
           }
           Content
+          technologies {
+            technologyName
+            technologyIcon {
+              url
+              alternativeText
+            }
+          }
       }
     }
   }

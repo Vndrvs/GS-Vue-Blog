@@ -245,14 +245,13 @@ export default {
     }
     
     & #desc-5 {
-      position: absolute;
       max-width: 50% !important;
       margin-right: 10%;
       font-size: 34px !important;
       bottom: 50% !important;
       line-height: 130% !important;
     }
-
+    
     & #desc-6 {
       max-width: 60% !important;
       line-height: 150% !important;
@@ -262,7 +261,7 @@ export default {
 }
 
 @media (max-width: 700px) { 
-
+  
   .text-content {
     
     & #desc {
@@ -285,10 +284,124 @@ export default {
       bottom: 50% !important;
       font-size: 16px !important;
     }
-
+    
     & #desc-4 {
       bottom: 60% !important;
       font-size: 4.2vw !important;
+    }
+  }
+}
+@media (max-width: 550px) { 
+
+  .container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    position: relative;
+    
+    .panel {
+      height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      color: white;
+      position: relative;
+      
+      & .text-content {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        
+        & #desc {
+          position: relative;
+          bottom: 30% !important;
+          text-align: left;
+          max-width: 60%;
+          font-weight: 300;
+        }
+        
+        & #desc-2 {
+          font-size: 1.4rem !important;
+          position: absolute;
+          text-align: right;
+          max-width: 50%;
+          bottom: 30% !important;
+          left: 20% !important;
+        }
+        
+        & #desc-3 {
+          text-align: right;
+          max-width: 30%;
+          line-height: 105%;
+          font-size: 4vw;
+          font-weight: 600;
+          margin: 0 0 10% 0;
+        }
+        
+        & #desc-4 {
+          position: absolute;
+          text-align: right;
+          max-width: 40%;
+          bottom: 70% !important;
+          left: 50% !important;
+          font-size: 3.9vw;
+          font-weight: 400;
+        }
+        
+        & #desc-5 {
+          align-self: flex-start;
+          text-align: left;
+          max-width: 40%;
+          margin: 30% 10% 20% 0;
+          margin-right: 10%;
+          line-height: 120%;
+          font-size: 16px !important;
+        }
+        
+        & #desc-6 {
+          margin-right: 20px;
+          position: absolute;
+          text-align: left;
+          max-width: 40%;
+          bottom: 30%;
+          left: 60%;
+          font-size: 10px !important;
+        }
+        
+        & #desc-7 {
+          position: absolute;
+          text-align: left;
+          max-width: 40%;
+          bottom: 38% !important;
+          left: 50%;
+          font-size: 2.5vw;
+          font-weight: 600;
+        }
+        
+        & #hi {
+          margin-bottom: 450px;
+          font-size: 1.4rem;
+          white-space: nowrap;
+          font-weight: 300;
+        }
+        
+        & #welcome {
+          font-size: 1.8rem;
+          position: absolute;
+        }
+        
+        & #thanks {
+          position: absolute;
+          font-size: 4.5vw;
+        }
+      }
+      
+      & h1, h2 {
+        color: var(--text-clr);
+        line-height: 100%;
+      }
     }
   }
 }

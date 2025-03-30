@@ -7,7 +7,7 @@
       </template>
     </el-page-header>
   </div>
-
+  
   <div class="projects-area">
     <div v-if="loading">Loading...</div>
     <div v-if="error">Error: {{ error.message }}</div>
@@ -30,32 +30,32 @@
               <div class="images-container">
                 <div v-if="project.projectCover" class="bubble-cover">
                   <img
-                    class="cover-image"
-                    :src="project.projectCover.url"
-                    :alt="project.projectCover.alternativeText"
+                  class="cover-image"
+                  :src="project.projectCover.url"
+                  :alt="project.projectCover.alternativeText"
                   />
                 </div>
                 <div v-if="project.technologies && project.technologies.length" class="tech-icons">
                   <span
-                    v-for="tech in project.technologies"
-                    :key="tech.technologyName"
-                    class="icons-span"
+                  v-for="tech in project.technologies"
+                  :key="tech.technologyName"
+                  class="icons-span"
                   >
-                    <img
-                      v-if="tech.technologyIcon"
-                      class="tech-icon"
-                      :src="tech.technologyIcon.url"
-                      :alt="tech.technologyIcon.alternativeText"
-                    />
-                  </span>
-                </div>
+                  <img
+                  v-if="tech.technologyIcon"
+                  class="tech-icon"
+                  :src="tech.technologyIcon.url"
+                  :alt="tech.technologyIcon.alternativeText"
+                  />
+                </span>
               </div>
             </div>
-          </router-link>
-        </template>
-      </el-row>
-    </div>
+          </div>
+        </router-link>
+      </template>
+    </el-row>
   </div>
+</div>
 </template>
 
 <script>
@@ -66,14 +66,14 @@ import { useNavigation } from '../utils/navigation.js';
 
 export default {
   name: 'ProjectsView',
-
+  
   setup() {
     const { goBackUsingBack } = useNavigation();
     
     const { result, loading, error } = useQuery(GET_PROJECTS, { fetchPolicy: 'no-cache' });
     
     const projects = ref([]);
-
+    
     watchEffect(() => {
       if (result.value && result.value.projects) {
         projects.value = result.value.projects;
@@ -81,7 +81,7 @@ export default {
         projects.value = [];
       }
     });
-
+    
     return {
       projects,
       loading,
@@ -114,46 +114,44 @@ export default {
   }
   
   & .project-container {
-    @include container-style(grid, auto, 1.4rem, 330px, 120px);
+    @include container-style(grid, auto, 1.4rem, 330px, 140px);
     align-items: center;
     overflow: hidden;
     border-radius: 1.9rem;
     border: 1px solid var(--text-clr);
     grid-template-columns: 2fr 1fr;
     background-image: linear-gradient(
-      150deg,
-      var(--text-clr / 80%) 0%,
-      var(--secondary-text-clr / 10%) 80%
+    150deg,
+    var(--text-clr / 80%) 0%,
+    var(--secondary-text-clr / 10%) 80%
     );
+
+    &:hover {
+      transition: 0.4s ease;
+      transform: translateY(-5px);
+      box-shadow: var(--accent-shadow-clr) 1px 8px 20px ;
+    }
     
     & .images-container {
       max-width: 100px;
       margin-left: 20px;
       
-      & .bubble-cover {
-        align-items: left;
-        align-items: flex-start;
-      }
-      
       & .cover-image {
         width: 90px;
         border-radius: 0.8rem;
       }
-      
-      & .icons-span {
-        max-height: 24px;
-      }
+
       
       & .tech-icons {
-        padding: 2px;
-        width: 87px;
+        @include container-style(flex, 4px 0 -10px 0, 2px, 87px, auto);
         max-height: 30%;
         border-radius: 0.4rem;
         border: 0.5px solid var(--text-clr);
-        display: flex;
-        gap: 4px;
-        margin-top: 4px;
-        margin-bottom: -10px;
+        gap: 2px;
+              
+      & .icons-span {
+        max-height: 24px;
+      }
         
         & .tech-icon {
           max-height: 23px;
@@ -164,9 +162,7 @@ export default {
     
     & .project-bubble {
       display: flex;
-      grid-template-columns: 1fr 1fr;
       text-align: left;
-      height: 16vh;
       
       & .bubble-content {
         margin: auto;
@@ -175,23 +171,24 @@ export default {
         gap: 8px;
       }
       
-      & .read-btn {
-        background-color: var(--accent-clr);
-      }
-      
       & h2, h3 {
         color: var(--text-clr);
       }
       
       & h2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+        overflow: hidden;
         font-family: Montserrat;
-        position: relative;
         font-weight: 700;
         font-size: 22px;
       }
       
       & .heading-container {
-        padding: 3px 0 0 0;
+        padding-top: 3px;
         border-top: 1.4px solid var(--text-clr);
         min-width: 160px;
       }
@@ -200,16 +197,16 @@ export default {
         font-size: 15px;
         font-weight: 500;
         font-family: Urbanist;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+        overflow: hidden;
       }
     }
   }
-  & .project-container:hover {
-    transition: 0.4s ease;
-    transform: translateY(-5px);
-    box-shadow: var(--accent-shadow-clr) 1px 8px 20px ;
-  }
 }
-
 
 .headline {
   
@@ -230,6 +227,83 @@ export default {
     column-gap: 0px;
     row-gap: 0px;
     gap: 0px;
+  }
+}
+
+@media (max-width: 900px) { 
+  .projects-area {
+    width: 100%;
+    margin: 20px auto;
+    
+    & .box-container {
+      row-gap: 5vh;
+      column-gap: 2vw;
+    }
+    
+    & .project-container {
+      @include container-style(grid, auto, 1.4rem, 56vw, 120px);
+      max-width: 330px;
+      
+      & .images-container {
+        max-width: 100px;
+        margin-left: 20px;
+      } 
+    }
+  }
+}
+
+@media (max-width: 480px) { 
+  
+  .project-container {
+    @include container-style(flex !important, auto, 12px 12px 18px 12px !important, 50vw !important, 300px !important);
+    flex-direction: column !important;
+    align-items: left !important;
+    text-align: left !important;
+    max-width: 200px !important;
+    border: 1px solid var(--text-clr) !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+
+    & .project-bubble {
+
+        & .bubble-content {
+          max-width: 180px;
+        }
+        
+        & h2 {
+          font-size: 1.2rem !important;
+        }
+
+        & h3 {
+          font-size: 0.9rem !important;
+          -webkit-line-clamp: 2 !important;
+          line-clamp: 2 !important;
+        }
+      }
+    
+    & .images-container {
+      align-items: center;
+      display: flex !important;
+      flex-direction: column-reverse !important;
+      margin: 0 0 0 0 !important;
+      gap: 20px !important;
+      
+      & .cover-image {
+        width: 160px !important;
+      }
+    }
+  }
+
+  .project-bubble {
+    width: 56vw !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  
+  .project-bubble-content {
+    width: 56vw !important;
   }
 }
 

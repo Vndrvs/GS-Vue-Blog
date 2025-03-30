@@ -4,7 +4,7 @@
   id="sidebar"
   :style="sidebarStyles"
   >
-  <div class="toggle-container">
+  <div class="toggle-container" :class="{ 'full-width': !isCollapse }" id="first-icon">
     <el-menu-item index="0" @click="toggleSidebar" class="toggle-button-item">
       <button id="toggle-button" :class="{ rotate: isRotated }">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="2 2 20 20" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -13,7 +13,7 @@
       </button>
     </el-menu-item>
   </div>
-  <div class="toggle-container">
+  <div class="toggle-container" :class="{ 'full-width': !isCollapse }">
     <el-menu-item index="1" class="sidebar-item">
       <button id="toggle-button" class="theme-btn" @click="toggleTheme" :title="theme === 'dark' ? 'Light Mode' : 'Dark Mode'">
         <img :src="theme === 'dark' ? sunIcon : moonIcon" />
@@ -80,7 +80,7 @@ const isMobile = window.innerWidth <= 900;
 const isHome = computed(() => route.path === "/" || route.path === "/home");
 
 const sidebarStyles = computed(() => ({
-  width: isCollapse.value ? (isMobile ? "60px" : "80px") : (isMobile ? "100vw" : "280px"),
+  width: isCollapse.value ? (isMobile ? "50px" : "80px") : (isMobile ? "100vw" : "280px"),
   borderRight: isCollapse.value ? "none" : (isMobile ? "none" : "3px solid var(--text-clr)"),
   transition: "width 0.3s ease, border-right 0.3s ease",
 }));
@@ -213,6 +213,11 @@ onMounted(() => {
 }
 
 @media (max-width: 900px) { 
+
+  #first-icon {
+    margin-top: 20px !important;
+  }
+  
   #sidebar {
     display: inline-block;
     margin: auto;
@@ -231,16 +236,20 @@ onMounted(() => {
     }
     
     & .toggle-container {
-      margin: 0 -10px -20px 0;
+      margin: 0 -20px -20px 0;
       display: flex;
       justify-content: flex-end;
+      
+      &.full-width {
+        margin: 0 -10px -20px 0;
+      }
     }
 
     #toggle-button {
       padding: 0;
       flex-shrink: 0;
-      width: 35px;
-      height: 35px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: 2px solid var(--text-clr);
       cursor: pointer;
@@ -283,4 +292,5 @@ onMounted(() => {
     }
   }
 }
+
 </style>

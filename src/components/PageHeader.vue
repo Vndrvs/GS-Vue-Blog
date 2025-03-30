@@ -37,4 +37,8 @@
   .headline {
     margin-bottom: 20px;
   }
+
+  @media (max-width: 650px) {
+    
+  }
   </style>

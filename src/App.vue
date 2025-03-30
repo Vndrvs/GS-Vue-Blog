@@ -31,6 +31,7 @@ function toggleMobileSidebar() {
 
 @use "@/styles/element/mixins.scss" as *;
 
+
 #app {
   @include container-style(grid, 0, 0, 100vw, 100vh);
   grid-template-columns: auto 1fr;
@@ -86,7 +87,7 @@ function toggleMobileSidebar() {
   }
   
   .main-content {
-    padding: 0px;
+    padding: 20px;
     overflow: auto;
     transition: margin-right 0.3s ease, padding 0.5s ease;
     
@@ -112,7 +113,7 @@ function toggleMobileSidebar() {
   }
   
   .main-content.with-sidebar {
-    margin-right: 0;
+    margin-right: 50px;
   }
 }
 
