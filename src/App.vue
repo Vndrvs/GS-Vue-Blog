@@ -33,11 +33,9 @@ function toggleMobileSidebar() {
 
 
 #app {
-  height: 100vh;
-  @include container-style(grid, 0, 0, 100vw, 100dvh);
+  @include container-style(grid, 0, 0, 100vw, 100svh);
   grid-template-columns: auto 1fr;
   overflow: hidden;
-  background-image: linear-gradient(10deg, var(--secondary-text-clr) 1%, var(--text-clr) 300%), linear-gradient(-4deg, var(--line-clr) 10%, var(--text-clr) 100%);
 }
 
 .sidebar {
@@ -63,9 +61,9 @@ function toggleMobileSidebar() {
       align-content: center;
       
       & .main-logo {
-        margin-top: 7%;
         width: 100%;
         height: 100%;
+        object-fit: contain;
       }
     }
   }
@@ -77,9 +75,7 @@ function toggleMobileSidebar() {
 
 @media (max-width: 900px) { 
   #app {
-    @include container-style(grid, 0, 0, 100vw, 100vh);
-    grid-template-columns: auto 1fr;
-    overflow: hidden;
+
     background-color: var(--background-color);
   }
   

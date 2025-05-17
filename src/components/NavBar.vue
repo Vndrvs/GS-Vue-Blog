@@ -121,7 +121,7 @@ onMounted(() => {
   display: inline-block;
   border: none;
   margin: 0 0 10px 10px;
-  height: 100vh;
+  height: 100svh;
   background-color: var(--background-clr);
   position: sticky;
   top: 0;
