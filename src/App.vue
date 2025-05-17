@@ -33,7 +33,8 @@ function toggleMobileSidebar() {
 
 
 #app {
-  @include container-style(grid, 0, 0, 100vw, 100vh);
+  height: 100vh;
+  @include container-style(grid, 0, 0, 100vw, 100dvh);
   grid-template-columns: auto 1fr;
   overflow: hidden;
   background-image: linear-gradient(10deg, var(--secondary-text-clr) 1%, var(--text-clr) 300%), linear-gradient(-4deg, var(--line-clr) 10%, var(--text-clr) 100%);
@@ -45,7 +46,7 @@ function toggleMobileSidebar() {
 
 .main-content {
   padding: 20px;
-  overflow: auto;
+  overflow: hidden;
   text-align: center;
   transition: margin-right 0.3s ease, padding 0.5s ease;
   
