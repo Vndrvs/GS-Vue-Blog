@@ -150,7 +150,7 @@ onMounted(() => {
   transition:
     width 600ms ease,
     border-right 0.3s ease;
-  overflow: auto;
+  overflow: hidden;
   border-right: 0 solid transparent;
   margin-top: 17px;
 

@@ -1,29 +1,32 @@
 <template>
   <main id="app">
-    <NavBar class="sidebar" @toggle-sidebar="toggleSidebar" />
-    <div :class="['main-content', { 'with-sidebar': isSidebarCollapsed }]">
-      <div class="header">
-        <div class="logo-div">
-          <img src="@/assets/gs-logo.png" alt="blog logo" class="main-logo" />
-        </div>
-      </div>
+    <SiteHeader :is-sidebar-open="showSidebar" @toggle-sidebar="toggleSidebar" />
+    <SidebarOverlay :isOpen="showSidebar" @close="closeSidebar" />
+    <div class="main-content">
       <router-view />
     </div>
   </main>
 </template>
 
-<script setup>
-import NavBar from './components/NavBar.vue'
-import { ref } from 'vue'
+<script>
+import SidebarOverlay from './components/SidebarOverlay.vue'
+import SiteHeader from './components/SiteHeader.vue'
 
-const isSidebarCollapsed = ref(true)
-
-function toggleSidebar() {
-  isSidebarCollapsed.value = !isSidebarCollapsed.value
-}
-
-function toggleMobileSidebar() {
-  isSidebarCollapsed.value = !isSidebarCollapsed.value
+export default {
+  components: { SidebarOverlay, SiteHeader },
+  data() {
+    return {
+      showSidebar: false,
+    }
+  },
+  methods: {
+    toggleSidebar() {
+      this.showSidebar = !this.showSidebar
+    },
+    closeSidebar() {
+      this.showSidebar = false
+    },
+  },
 }
 </script>
 
@@ -31,95 +34,30 @@ function toggleMobileSidebar() {
 @use '@/styles/element/mixins.scss' as *;
 
 #app {
-  @include container-style(grid, 0, 0, 100vw, 100svh);
-  grid-template-columns: auto 1fr;
-  overflow: hidden;
-}
-
-.sidebar {
-  transition: width 0.3s ease;
-}
-
-.main-content {
-  padding: 20px;
-  overflow: hidden;
-  text-align: center;
-  transition:
-    margin-right 0.3s ease,
-    padding 0.5s ease;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  & .header {
+  .main-content {
+    padding: 20px;
+    text-align: center;
     display: flex;
-    justify-content: center;
-    height: 9%;
-    margin: 12px 0 24px 0;
+    flex-direction: column;
+    justify-items: center;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 
-    & .logo-div {
-      height: 110%;
-      display: flex;
-      justify-content: center;
-      align-content: center;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
-      & .main-logo {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
+    &::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
     }
   }
-}
-
-.main-content.with-sidebar {
-  margin-right: 90px;
 }
 
 @media (max-width: 900px) {
   #app {
-    background-color: var(--background-color);
-  }
-
-  .sidebar {
-    transition: width 0.3s ease;
-  }
-
-  .main-content {
-    padding: 20px;
-    overflow: auto;
-    transition:
-      margin-right 0.3s ease,
-      padding 0.5s ease;
-
-    & .header {
-      display: flex;
-      justify-content: center;
-      height: 9%;
-      margin: 12px 0 24px 0;
-
-      & .logo-div {
-        height: 110%;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-
-        & .main-logo {
-          margin-top: 7%;
-          height: 50px;
-          width: 50px;
-        }
-      }
+    .main-content {
+      overflow: auto;
     }
-  }
-
-  .main-content.with-sidebar {
-    margin-right: 50px;
   }
 }
 </style>

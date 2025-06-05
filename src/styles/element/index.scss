@@ -9,7 +9,7 @@
 }
 
 :root.light {
-  --base-clr: rgba(190, 190, 190, 0.851);
+  --base-clr: rgba(190, 190, 190);
   --base-2-clr: rgba(66, 66, 66, 0.983);
   --line-clr: rgba(43, 43, 125, 0.525);
   --btn-clr: rgb(131, 135, 229);
@@ -17,9 +17,10 @@
   --text-clr: rgb(0, 0, 0);
   --secondary-text-clr: rgb(255, 255, 255);
   --accent-clr: #6c6fce;
+  --accent-clr-shade: #979aee;
   --container-clr: rgb(104, 104, 104);
   --shadow-clr: rgb(0, 203, 243);
-  --accent-shadow-clr: rgba(103, 12, 214, 0.752);
+  --accent-shadow-clr: rgba(103, 12, 214);
   --button-1: var(--accent-clr);
   --button-2: #5c42ef;
   --button-3: var(--accent-clr);
@@ -36,8 +37,9 @@
   --text-clr: rgb(221, 221, 234);
   --secondary-text-clr: rgb(0, 0, 0);
   --accent-clr: rgb(219, 204, 46);
+  --accent-clr-shade: rgb(243, 232, 116);
   --container-clr: rgba(0, 0, 0, 0.229);
-  --shadow-clr: rgba(103, 12, 214, 0.752);
+  --shadow-clr: rgba(103, 12, 214);
   --accent-shadow-clr: rgb(0, 203, 243);
   --button-1: #ffff72;
   --button-2: #ffd000;
