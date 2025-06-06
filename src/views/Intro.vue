@@ -8,29 +8,9 @@
         </template>
       </el-page-header>
     </div>
-    <div class="title-box">
-      <h1 class="title"></h1>
-      <h3 class="heading">For that one place on the internet that feels like falling in love.</h3>
-      <div class="main-text">
-        <p class="paragraph">
-          The kind that makes you want to scroll lower. Or click, just to stay a little longer.
-        </p>
-        <p class="paragraph">
-          The experience that brings comfort and joy, even when the world is a very frightnening
-          place.
-        </p>
-        <p class="paragraph">
-          Not because it was coded to do so, but because the ones who gave birth to it couldn't help
-          but care too much.
-        </p>
-        <p class="paragraph">
-          Self-serving design is no good design. But when something purposeful is built with
-          emotion, it shows.
-        </p>
-        <p class="paragraph">
-          Maybe not in the way you expect, but it leaves warmth exactly where it’s most needed.
-        </p>
-      </div>
+
+    <div class="typewriter-box">
+      <h1 ref="typewriterRef" class="typewriter-text"></h1>
     </div>
   </div>
 </template>
@@ -43,11 +23,49 @@ export default {
   name: 'IntroView',
   setup() {
     const { goBackUsingBack } = useNavigation()
-    const container = ref(null)
+    const typewriterRef = ref(null)
+
+    const phrases = [
+      'For that one place on the internet that feels like falling in love.',
+      'The kind that makes you want to scroll lower. Or click, just to stay a little longer.',
+      'Not because it was coded to do so, but because the ones who gave birth to it cared a bit too much.',
+      'A design that only serves itself is hollow.',
+      'But when something purposeful is built with emotion, it shows.',
+      'It may not look like what you expected. But it feels like exactly what you needed.',
+    ]
+
+    function typeWriter(text, i, callback) {
+      if (i < text.length) {
+        if (typewriterRef.value) {
+          typewriterRef.value.innerHTML =
+            text.substring(0, i + 1) + '<span class="caret" aria-hidden="true"></span>'
+        }
+        setTimeout(() => typeWriter(text, i + 1, callback), 70)
+      } else if (typeof callback === 'function') {
+        setTimeout(callback, 2000)
+      }
+    }
+
+    function startTextAnimation(i) {
+      if (typeof phrases[i] === 'undefined') {
+        setTimeout(() => startTextAnimation(0), 3000)
+        return
+      }
+
+      if (i < phrases.length) {
+        typeWriter(phrases[i], 0, () => {
+          startTextAnimation(i + 1)
+        })
+      }
+    }
+
+    onMounted(() => {
+      startTextAnimation(0)
+    })
 
     return {
       goBackUsingBack,
-      container,
+      typewriterRef,
     }
   },
 }
@@ -58,46 +76,111 @@ export default {
 
 .main-wrapper {
   width: 80%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
 
   .headline {
-    & h4 {
-      color: var(--text-clr);
-      font-weight: 400;
-    }
-
-    & .el-divider.el-divider--vertical {
-      border-left: 1.5px solid var(--text-clr) !important;
-      background-color: transparent !important;
-      margin: 0 8px !important;
-      column-gap: 0px;
-    }
-    & .el-page-header {
+    .el-page-header {
       color: var(--text-clr);
       margin: 16px 0 10px 0;
-      column-gap: 0px;
-      row-gap: 0px;
-      gap: 0px;
     }
+
     .spec-title {
-      @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
+      @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr));
     }
   }
-  & h3 {
-    margin: 10px 0;
-    color: var(--text-clr);
+}
+
+.typewriter-box {
+  margin-top: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.typewriter-text {
+  font-size: 2.5rem;
+  font-family: var(--heading-font);
+  font-weight: 400;
+  color: var(--text-clr);
+  text-transform: none;
+}
+
+.caret::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 3px;
+  animation: blink-caret 1s steps(1) infinite;
+  color: var(--text-clr);
+}
+@keyframes softFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  & p {
-    color: var(--text-clr);
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  animation: softFadeIn 0.6s ease forwards;
+}
+
+@keyframes blink-caret {
+  50% {
+    opacity: 0;
   }
 }
 
 @media (max-width: 900px) {
-}
+  .headline {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 
-@media (max-width: 700px) {
-}
-@media (max-width: 550px) {
+    .el-page-header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 16px 0 10px 0;
+      color: var(--text-clr);
+    }
+
+    .custom-breadcrumb {
+      justify-content: center;
+    }
+
+    h4 {
+      color: var(--text-clr);
+      font-weight: 400;
+    }
+
+    .el-divider.el-divider--vertical {
+      border-left: 1.5px solid var(--text-clr) !important;
+      background-color: transparent !important;
+      margin: 0 8px !important;
+    }
+
+    .spec-title {
+      @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
+    }
+  }
+  .typewriter-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
 }
 </style>
