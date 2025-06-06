@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrapper">
-    <div class="headline" v-if="post">
+    <div class="headline">
       <el-page-header @back="goBackUsingBack">
         <template #content>
           <el-breadcrumb class="custom-breadcrumb" separator="|">
@@ -66,7 +66,11 @@
           :src="post.pic5.url"
           :alt="post.pic5.alternativeText"
         />
-        <p class="content-text" v-html="parseContent(post.Content6)"></p>
+        <p
+          v-if="parseContent(post.Content6)"
+          class="content-text"
+          v-html="parseContent(post.Content6)"
+        ></p>
       </div>
     </div>
   </div>
@@ -163,7 +167,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use '@/styles/element/mixins.scss' as *;
 
 .published-date {
@@ -171,17 +175,17 @@ export default {
 }
 
 .main-wrapper {
-  max-width: 70%;
+  max-width: 75%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
 
   .content-container {
-    & h1,
+    h1,
     h2,
     h4,
     p {
-      margin: 0 auto 0 auto;
+      margin: 0 auto;
       color: var(--text-clr);
       text-align: left;
       line-height: 100%;
@@ -209,8 +213,27 @@ export default {
       @include font-style(var(--body-font), 400, 1rem, 130% !important, none, var(--text-clr));
     }
 
-    & .content-text {
-      padding: 10px 0 10px 0;
+    .cover-image {
+      margin: 3%;
+      width: 40%;
+    }
+
+    .content-image {
+      max-width: 50%;
+    }
+
+    .content-section {
+      > * {
+        margin: 0.4rem 0;
+      }
+
+      > *:last-child {
+        margin-bottom: 2%;
+      }
+    }
+
+    .content-text {
+      padding: 10px 0;
 
       pre {
         background-color: #1a1a1a;
@@ -231,76 +254,95 @@ export default {
         white-space: pre-wrap;
       }
     }
-
-    & .content-section {
-      > * {
-        margin-bottom: 0.4rem;
-        margin-top: 0.4rem;
-      }
-      > *:last-child {
-        margin-bottom: 2%;
-      }
-    }
-
-    & .cover-image {
-      margin: 3%;
-      width: 40%;
-    }
-
-    & .content-image {
-      max-width: 50%;
-    }
   }
 }
-
 @media (max-width: 900px) {
-  .content-container {
-    margin: 0 0 20px 0 !important;
+  .main-wrapper {
+    .headline {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
 
-    @include responsive-text(auto, break-word, auto, visible, none);
+      .el-page-header {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin: 16px 0 10px 0;
+        color: var(--text-clr);
+      }
 
-    & .cover-image {
-      margin: 3% 0 0 0;
-      width: 100% !important;
+      .custom-breadcrumb {
+        justify-content: center;
+      }
+
+      h4 {
+        color: var(--text-clr);
+        font-weight: 400;
+      }
+
+      .el-divider.el-divider--vertical {
+        border-left: 1.5px solid var(--text-clr) !important;
+        background-color: transparent !important;
+        margin: 0 8px !important;
+      }
+
+      .spec-title {
+        @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
+      }
     }
 
-    & .content-section {
-      width: 100%;
+    .content-container {
+      margin: 0 0 20px 0 !important;
+      @include responsive-text(auto, break-word, auto, visible, none);
 
-      & h1,
-      h2,
-      h4,
-      p {
-        margin: 0 auto 0 auto;
-        color: var(--text-clr);
-        max-width: 100%;
-        text-align: left;
-        line-height: 100%;
+      .cover-image {
+        margin-top: 3%;
+        width: 100% !important;
       }
 
-      & h1 {
-        margin: 4% 0 0 0;
-        @include font-style(var(--heading-font), 800, 1.8em, 110%, none, var(--text-clr));
-      }
+      .content-section {
+        width: 100%;
 
-      & h2 {
-        margin: 3% 0 0 0;
-        font-size: 1.2rem;
-        margin-bottom: 3% !important;
-      }
+        h1,
+        h2,
+        h4,
+        p {
+          margin: 0 auto;
+          color: var(--text-clr);
+          max-width: 100%;
+          text-align: left;
+          line-height: 100%;
+        }
 
-      & h4 {
-        margin: 6% 0 0 0 !important;
-        @include font-style(var(--heading-font), 500, 0.9rem, 20px, none, var(--text-clr));
-      }
+        h1 {
+          margin-top: 4%;
+          @include font-style(var(--heading-font), 800, 1.8em, 110%, none, var(--text-clr));
+        }
 
-      & p {
-        margin: 4% 0 0 0;
-        @include font-style(var(--body-font), 400, 1rem, 130% !important, none, var(--text-clr));
-      }
+        h2 {
+          margin: 3% 0 !important;
+          font-size: 1.2rem;
+          font-weight: 600;
+        }
 
-      & .content-image {
-        max-width: 100%;
+        h4 {
+          margin-top: 6% !important;
+          @include font-style(var(--heading-font), 500, 0.9rem, 20px, none, var(--text-clr));
+        }
+
+        p {
+          @include font-style(var(--body-font), 400, 1rem, 130% !important, none, var(--text-clr));
+        }
+
+        .content-image {
+          margin: 10px 0;
+          max-width: 100%;
+        }
       }
     }
   }

@@ -101,9 +101,19 @@ export default {
 @use '@/styles/element/mixins.scss' as *;
 
 .main-wrapper {
-  width: 90%;
+  width: 80%;
 
   .headline {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .el-page-header {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
     & h4 {
       color: var(--text-clr);
       font-weight: 400;
@@ -122,6 +132,7 @@ export default {
       row-gap: 0px;
       gap: 0px;
     }
+
     .spec-title {
       @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
     }
@@ -142,7 +153,7 @@ export default {
     }
 
     & .project-container {
-      @include container-style(grid, 10px, 1.4rem, 330px, 140px);
+      @include container-style(grid, 30px, 1.4rem, 330px, 140px);
       align-items: center;
       border-radius: 1.9rem;
       border: 1px solid var(--text-clr);
@@ -238,6 +249,11 @@ export default {
 
 @media (max-width: 900px) {
   .main-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
     .projects-area {
       padding: 0 16px;
       .box-container {
@@ -249,7 +265,7 @@ export default {
       .project-container {
         @include container-style(
           flex !important,
-          auto,
+          0 30px 0 30px,
           12px 12px 18px 12px !important,
           100% !important,
           300px !important
@@ -260,7 +276,7 @@ export default {
         border-radius: 20px !important;
 
         & .project-bubble {
-          width: 56vw !important;
+          width: 170px !important;
           display: flex !important;
           flex-direction: column !important;
           align-items: center !important;

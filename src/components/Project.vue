@@ -1,34 +1,36 @@
 <template>
   <div class="main-wrapper">
-    <div class="headline" v-if="project">
-      <el-page-header @back="goBackUsingBack">
-        <template #content>
-          <el-breadcrumb class="custom-breadcrumb" separator="|">
-            <el-breadcrumb-item class="custom-breadcrumb" id="route">
-              <a @click.prevent="goToHome">Homepage</a>
-            </el-breadcrumb-item>
-            <el-breadcrumb-item class="custom-breadcrumb-item">
-              {{ project.projectTitle }}
-            </el-breadcrumb-item>
-          </el-breadcrumb>
-        </template>
-      </el-page-header>
-    </div>
+    <div class="top-section">
+      <div class="headline">
+        <el-page-header @back="goBackUsingBack">
+          <template #content>
+            <el-breadcrumb class="custom-breadcrumb" separator="|">
+              <el-breadcrumb-item class="custom-breadcrumb" id="route">
+                <a @click.prevent="goToHome">Homepage</a>
+              </el-breadcrumb-item>
+              <el-breadcrumb-item class="custom-breadcrumb-item">
+                {{ project.projectTitle }}
+              </el-breadcrumb-item>
+            </el-breadcrumb>
+          </template>
+        </el-page-header>
+      </div>
 
-    <div v-if="loading">Loading...</div>
-    <div v-if="error">Error: {{ error.message }}</div>
+      <div v-if="loading">Loading...</div>
+      <div v-if="error">Error: {{ error.message }}</div>
 
-    <div v-if="project" class="project-content-container">
-      <div class="head-section">
-        <img
-          v-if="project.projectCover"
-          class="cover-image"
-          :src="project.projectCover.url"
-          :alt="project.projectCover.alternativeText"
-        />
-        <h1 id="title">{{ project.projectTitle }}</h1>
-        <h2 id="heading">{{ project.projectHeading }}</h2>
-        <p id="project-desc">{{ project.projectDescription }}</p>
+      <div v-if="project" class="project-content-container">
+        <div class="head-section">
+          <img
+            v-if="project.projectCover"
+            class="cover-image"
+            :src="project.projectCover.url"
+            :alt="project.projectCover.alternativeText"
+          />
+          <h1 id="title">{{ project.projectTitle }}</h1>
+          <h2 id="heading">{{ project.projectHeading }}</h2>
+          <p id="project-desc">{{ project.projectDescription }}</p>
+        </div>
       </div>
     </div>
 
@@ -148,170 +150,215 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use '@/styles/element/mixins.scss' as *;
 
-.blogpost-link:hover {
-  transform: translateY(-5px);
-  transition: 0.4s ease;
-}
+.main-wrapper {
+  max-width: 80%;
 
-.project-content-container {
-  display: flex;
-
-  & h1,
-  h2,
-  p {
-    margin: 0 auto 0 auto;
-    color: var(--text-clr);
+  .top-section {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
     max-width: 80%;
-    text-align: left;
-    line-height: 100%;
   }
 
-  & p {
-    @include font-style(var(--body-font), 400, 1rem, 130% !important, none, var(--text-clr));
-  }
+  .headline {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
-  & h1 {
-    @include font-style(var(--heading-font), 800, 3em, 44px, none, var(--text-clr));
-    margin-bottom: 2.4% !important;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-  }
-
-  & h2 {
-    @include font-style(var(--heading-font), 0, 2rem, 110%, none, var(--text-clr));
-    margin-bottom: 3%;
-  }
-
-  & .cover-image {
-    margin: 3%;
-    width: 45%;
-    max-width: 400px;
-  }
-}
-
-.blogpost-link {
-  text-decoration: none;
-  margin: auto;
-}
-
-/* ------------------------------ */
-/* Blogpost cards */
-
-.blogposts-area {
-  width: 90%;
-  margin: 5% auto 7% auto;
-
-  #blogposts-title {
-    margin: 5%;
-    @include font-style(var(--heading-font), 700, 2.2rem, 100%, none, var(--text-clr));
-  }
-
-  & .card-container {
-    column-gap: 50px;
-    row-gap: 5vh;
-  }
-
-  & .blogpost-container {
-    @include container-style(grid, auto, 1.4rem, 330px, 130px);
-    align-items: center;
-    overflow: hidden;
-    border-radius: 1.9rem;
-    border: 1px solid var(--text-clr);
-    grid-template-columns: 2fr 1fr;
-    background-image: linear-gradient(
-      150deg,
-      var(--text-clr / 80%) 0%,
-      var(--secondary-text-clr / 10%) 80%
-    );
-
-    &:hover {
-      transition: 0.4s ease;
-      transform: translateY(-5px);
-      box-shadow: var(--accent-shadow-clr) 1px 8px 20px;
+    .el-page-header {
+      width: 100%;
+      max-width: 1000px;
+      margin: 16px 0 10px 0;
+      color: var(--text-clr);
     }
 
-    & .el-column {
-      display: flex;
-      justify-content: center;
+    h4 {
+      color: var(--text-clr);
+      font-weight: 400;
+    }
+  }
+
+  .project-content-container {
+    & .cover-image {
+      margin: 3%;
+      width: 45%;
+      max-width: 400px;
     }
 
-    & .blogpost-images-container {
-      max-width: 100px;
-      margin: 0 0 10px 14px;
-
-      & .blogpost-cover-image {
-        width: 90px;
-        border-radius: 0.8rem;
-      }
-
-      & .blogpost-tech-icons {
-        @include container-style(flex, 4px 0 -10px 0, 2px, 87px, auto);
-        max-height: 30%;
-        border-radius: 0.4rem;
-        border: 0.5px solid var(--text-clr);
-        gap: 2px;
-
-        & .blogpost-icons-span {
-          max-height: 24px;
-        }
-
-        & .blogpost-tech-icon {
-          max-height: 23px;
-          margin-left: 3px;
-        }
-      }
-    }
-
-    & .blogpost-bubble {
-      display: flex;
+    & h1,
+    h2,
+    p {
       text-align: left;
+    }
 
-      & .blogpost-bubble-content {
+    & h1 {
+      @include font-style(var(--heading-font), 800, 3em, 44px, none, var(--text-clr));
+      margin: 0 auto 2.4% auto !important;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    & h2 {
+      @include font-style(var(--heading-font), 0, 2rem, 110%, none, var(--text-clr));
+      margin: 0 auto 3% auto;
+    }
+
+    & p {
+      @include font-style(var(--body-font), 400, 1rem, 130% !important, none, var(--text-clr));
+      margin: 0 auto;
+    }
+  }
+
+  .blogposts-area {
+    width: 90%;
+    margin: 5% auto 7% auto;
+
+    #blogposts-title {
+      margin: 5%;
+      @include font-style(var(--heading-font), 700, 2.2rem, 100%, none, var(--text-clr));
+    }
+
+    .card-container {
+      column-gap: 50px;
+      row-gap: 5vh;
+    }
+
+    .blogposts-container {
+      .blogpost-link {
+        text-decoration: none;
         margin: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+
+        &:hover {
+          transform: translateY(-5px);
+          transition: 0.4s ease;
+        }
       }
 
-      & p {
-        font-size: 13px;
-        color: var(--text-clr);
-      }
-
-      & h2 {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        -webkit-box-orient: vertical;
-        box-orient: vertical;
+      .blogpost-container {
+        @include container-style(grid, auto, 1.4rem, 330px, 130px);
+        align-items: center;
         overflow: hidden;
-        @include font-style(var(--heading-font), 700, 1.4em, 100%, none, var(--text-clr));
-      }
+        border-radius: 1.9rem;
+        border: 1px solid var(--text-clr);
+        grid-template-columns: 2fr 1fr;
+        background-image: linear-gradient(
+          150deg,
+          var(--text-clr / 80%) 0%,
+          var(--secondary-text-clr / 10%) 80%
+        );
 
-      & .blogpost-heading-container {
-        padding-top: 3px;
-        border-top: 1.4px solid var(--text-clr);
-        min-width: 160px;
-      }
+        &:hover {
+          transition: 0.4s ease;
+          transform: translateY(-5px);
+          box-shadow: var(--accent-shadow-clr) 1px 8px 20px;
+        }
 
-      & h3 {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-        -webkit-box-orient: vertical;
-        box-orient: vertical;
-        overflow: hidden;
-        @include font-style(var(--body-font), 400, 15px, 130%, none, var(--text-clr));
+        .el-column {
+          display: flex;
+          justify-content: center;
+        }
+
+        .blogpost-images-container {
+          max-width: 100px;
+          margin: 0 0 10px 14px;
+
+          .blogpost-cover-image {
+            width: 90px;
+            border-radius: 0.8rem;
+          }
+
+          .blogpost-tech-icons {
+            @include container-style(flex, 4px 0 -10px 0, 2px, 87px, auto);
+            max-height: 30%;
+            border-radius: 0.4rem;
+            border: 0.5px solid var(--text-clr);
+            gap: 2px;
+
+            .blogpost-icons-span {
+              max-height: 24px;
+            }
+
+            .blogpost-tech-icon {
+              max-height: 23px;
+              margin-left: 3px;
+            }
+          }
+        }
+
+        .blogpost-bubble {
+          display: flex;
+          text-align: left;
+
+          .blogpost-bubble-content {
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            p {
+              font-size: 13px;
+              color: var(--text-clr);
+            }
+
+            h2 {
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              line-clamp: 2;
+              -webkit-box-orient: vertical;
+              box-orient: vertical;
+              overflow: hidden;
+              @include font-style(var(--heading-font), 700, 1.4em, 100%, none, var(--text-clr));
+            }
+
+            .blogpost-heading-container {
+              padding-top: 3px;
+              border-top: 1.4px solid var(--text-clr);
+              min-width: 160px;
+            }
+
+            h3 {
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              line-clamp: 3;
+              -webkit-box-orient: vertical;
+              box-orient: vertical;
+              overflow: hidden;
+              @include font-style(var(--body-font), 400, 15px, 130%, none, var(--text-clr));
+            }
+          }
+        }
       }
     }
   }
 }
 
 @media (max-width: 900px) {
+  .main-wrapper {
+    & .headline {
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+
+      .el-page-header {
+        display: flex !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        text-align: center !important;
+        margin: 16px 0 10px 0;
+      }
+
+      .custom-breadcrumb {
+        justify-content: center !important;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+    }
+  }
   .project-content-container {
     max-width: 90%;
     margin: auto;
@@ -436,61 +483,66 @@ export default {
 
 @media (max-width: 680px) {
   .main-wrapper {
-    .blogposts-area {
-      padding: 0 16px;
-      .box-container {
-        display: flex !important;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      .blogpost-container {
-        @include container-style(
-          flex !important,
-          auto,
-          12px 12px 18px 12px !important,
-          100% !important,
-          300px !important
-        );
-        flex-direction: column !important;
-        max-width: 200px !important;
-        border: 1px solid var(--text-clr) !important;
-        border-radius: 20px !important;
-
-        & .blogpost-bubble {
-          padding: 10px;
-          width: 150px !important;
+    & .top-section {
+      & .blogposts-area {
+        padding: 0 16px;
+        & .box-container {
           display: flex !important;
-          flex-direction: column !important;
-          align-items: center !important;
-          text-align: center !important;
-
-          & .blogpost-heading-container {
-            margin: 0 auto;
-            width: 140px;
-          }
-
-          & h2 {
-            font-size: 1.2rem !important;
-          }
-
-          & h3 {
-            max-width: 170px;
-            font-size: 0.9rem !important;
-            -webkit-line-clamp: 2 !important;
-            line-clamp: 2 !important;
-          }
-        }
-
-        & .blogpost-images-container {
+          flex-direction: column;
           align-items: center;
-          display: flex !important;
-          flex-direction: column-reverse !important;
-          margin: 0 0 0 0 !important;
-          gap: 20px !important;
+          justify-content: center;
+        }
+        & .blogpost-container {
+          @include container-style(
+            flex !important,
+            auto,
+            12px 12px 18px 12px !important,
+            100% !important,
+            300px !important
+          );
+          flex-direction: column !important;
+          max-width: 200px !important;
+          border: 1px solid var(--text-clr) !important;
+          border-radius: 20px !important;
 
-          & .blogpost-cover-image {
-            width: 140px !important;
+          & .blogpost-bubble {
+            width: 170px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+
+            & .blogpost-bubble-content {
+              max-width: 180px;
+            }
+
+            & .blogpost-heading-container {
+              margin: 0 auto;
+              width: 140px;
+            }
+
+            & h2 {
+              font-size: 1.2rem !important;
+            }
+
+            & h3 {
+              max-width: 170px;
+              font-size: 0.9rem !important;
+              -webkit-line-clamp: 2 !important;
+              line-clamp: 2 !important;
+            }
+          }
+
+          & .blogpost-images-container {
+            align-items: center;
+            display: flex !important;
+            flex-direction: column-reverse !important;
+            margin: 0 0 0 0 !important;
+            gap: 20px !important;
+
+            & .blogpost-cover-image {
+              width: 140px !important;
+            }
           }
         }
       }
