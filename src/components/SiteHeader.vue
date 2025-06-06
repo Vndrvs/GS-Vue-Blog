@@ -197,21 +197,15 @@ const onToggleSidebar = () => {
     }
 
     & #toggle-button {
-      width: 4.9em !important;
-      height: 4.9em !important;
-      border: 2px solid var(--text-clr);
-      cursor: pointer;
-      pointer-events: auto;
-      transition: right 0.3s ease;
+      border: 2px solid var(--text-clr) !important;
 
       & svg {
-        transform: rotate(180deg);
-        width: 1em;
         height: 24px !important;
         stroke-width: 0.2em !important;
       }
     }
   }
+
   .logo img {
     position: relative;
     top: 10px;
