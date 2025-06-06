@@ -1,84 +1,86 @@
 <template>
-  <div class="headline" v-if="project">
-    <el-page-header @back="goBackUsingBack">
-      <template #content>
-        <el-breadcrumb class="custom-breadcrumb" separator="|">
-          <el-breadcrumb-item class="custom-breadcrumb" id="route">
-            <a @click.prevent="goToHome">Homepage</a>
-          </el-breadcrumb-item>
-          <el-breadcrumb-item class="custom-breadcrumb-item">
-            {{ project.projectTitle }}
-          </el-breadcrumb-item>
-        </el-breadcrumb>
-      </template>
-    </el-page-header>
-  </div>
-
-  <div v-if="loading">Loading...</div>
-  <div v-if="error">Error: {{ error.message }}</div>
-
-  <div v-if="project" class="project-content-container">
-    <div class="head-section">
-      <img
-        v-if="project.projectCover"
-        class="cover-image"
-        :src="project.projectCover.url"
-        :alt="project.projectCover.alternativeText"
-      />
-      <h1 id="title">{{ project.projectTitle }}</h1>
-      <h2 id="heading">{{ project.projectHeading }}</h2>
-      <p id="project-desc">{{ project.projectDescription }}</p>
+  <div class="main-wrapper">
+    <div class="headline" v-if="project">
+      <el-page-header @back="goBackUsingBack">
+        <template #content>
+          <el-breadcrumb class="custom-breadcrumb" separator="|">
+            <el-breadcrumb-item class="custom-breadcrumb" id="route">
+              <a @click.prevent="goToHome">Homepage</a>
+            </el-breadcrumb-item>
+            <el-breadcrumb-item class="custom-breadcrumb-item">
+              {{ project.projectTitle }}
+            </el-breadcrumb-item>
+          </el-breadcrumb>
+        </template>
+      </el-page-header>
     </div>
-  </div>
 
-  <div class="blogposts-area">
-    <div v-if="!loading && posts && posts.length">
-      <h2 id="blogposts-title">Related Blog Posts</h2>
-      <el-row :gutter="20" justify="center" class="card-container">
-        <div v-for="blog_post in posts" :key="blog_post.documentId" class="blogposts-container">
-          <router-link :to="`/blog/${blog_post.documentId}`" class="blogpost-link">
-            <div class="blogpost-container">
-              <div class="blogpost-bubble">
-                <div class="blogpost-bubble-content">
-                  <p>{{ parsePublishedDate(blog_post.publishedAt) }}</p>
-                  <div class="blogpost-title-container">
-                    <h2>{{ blog_post.Title }}</h2>
-                  </div>
-                  <div class="blogpost-heading-container">
-                    <h3>{{ blog_post.H1 }}</h3>
+    <div v-if="loading">Loading...</div>
+    <div v-if="error">Error: {{ error.message }}</div>
+
+    <div v-if="project" class="project-content-container">
+      <div class="head-section">
+        <img
+          v-if="project.projectCover"
+          class="cover-image"
+          :src="project.projectCover.url"
+          :alt="project.projectCover.alternativeText"
+        />
+        <h1 id="title">{{ project.projectTitle }}</h1>
+        <h2 id="heading">{{ project.projectHeading }}</h2>
+        <p id="project-desc">{{ project.projectDescription }}</p>
+      </div>
+    </div>
+
+    <div class="blogposts-area">
+      <div v-if="!loading && posts && posts.length">
+        <h2 id="blogposts-title">Related Blog Posts</h2>
+        <el-row :gutter="20" justify="center" class="card-container">
+          <div v-for="blog_post in posts" :key="blog_post.documentId" class="blogposts-container">
+            <router-link :to="`/blog/${blog_post.documentId}`" class="blogpost-link">
+              <div class="blogpost-container">
+                <div class="blogpost-bubble">
+                  <div class="blogpost-bubble-content">
+                    <p>{{ parsePublishedDate(blog_post.publishedAt) }}</p>
+                    <div class="blogpost-title-container">
+                      <h2>{{ blog_post.Title }}</h2>
+                    </div>
+                    <div class="blogpost-heading-container">
+                      <h3>{{ blog_post.H1 }}</h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="blogpost-images-container">
-                <div v-if="blog_post.Cover" class="blogpost-bubble-cover">
-                  <img
-                    class="blogpost-cover-image"
-                    :src="blog_post.Cover.url"
-                    :alt="blog_post.Cover.alternativeText"
-                  />
-                </div>
-                <div
-                  v-if="blog_post.technologies && blog_post.technologies.length"
-                  class="blogpost-tech-icons"
-                >
-                  <span
-                    v-for="tech in blog_post.technologies"
-                    :key="tech.technologyName"
-                    class="blogpost-icons-span"
-                  >
+                <div class="blogpost-images-container">
+                  <div v-if="blog_post.Cover" class="blogpost-bubble-cover">
                     <img
-                      v-if="tech.technologyIcon"
-                      class="blogpost-tech-icon"
-                      :src="tech.technologyIcon.url"
-                      :alt="tech.technologyIcon.alternativeText"
+                      class="blogpost-cover-image"
+                      :src="blog_post.Cover.url"
+                      :alt="blog_post.Cover.alternativeText"
                     />
-                  </span>
+                  </div>
+                  <div
+                    v-if="blog_post.technologies && blog_post.technologies.length"
+                    class="blogpost-tech-icons"
+                  >
+                    <span
+                      v-for="tech in blog_post.technologies"
+                      :key="tech.technologyName"
+                      class="blogpost-icons-span"
+                    >
+                      <img
+                        v-if="tech.technologyIcon"
+                        class="blogpost-tech-icon"
+                        :src="tech.technologyIcon.url"
+                        :alt="tech.technologyIcon.alternativeText"
+                      />
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </router-link>
-        </div>
-      </el-row>
+            </router-link>
+          </div>
+        </el-row>
+      </div>
     </div>
   </div>
 </template>
@@ -228,6 +230,7 @@ export default {
 
     &:hover {
       transition: 0.4s ease;
+      transform: translateY(-5px);
       box-shadow: var(--accent-shadow-clr) 1px 8px 20px;
     }
 
@@ -238,7 +241,7 @@ export default {
 
     & .blogpost-images-container {
       max-width: 100px;
-      margin-left: 20px;
+      margin: 0 0 10px 14px;
 
       & .blogpost-cover-image {
         width: 90px;
@@ -392,7 +395,6 @@ export default {
     }
 
     & .blogpost-container {
-      @include container-style(grid, auto, 1.4rem, 330px, 120px);
       align-items: center;
       overflow: hidden;
       border-radius: 1.9rem;
@@ -429,49 +431,6 @@ export default {
         }
       }
     }
-
-    & .blogpost-container:hover {
-      & .blogpost-images-container {
-        margin: 28px 0 0 230px;
-      }
-    }
-  }
-}
-
-@media (max-width: 670px) {
-  .blogposts-area .blogpost-container {
-    display: flex;
-    flex-direction: column; /* Stack image above text */
-    align-items: center;
-    text-align: center;
-    border: 1px solid var(--text-clr);
-    border-radius: 14px;
-    overflow: hidden;
-    padding: 10px;
-  }
-
-  .blogposts-area .blogpost-images-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 10px;
-    position: relative !important;
-  }
-
-  .blogposts-area .blogpost-cover-image {
-    max-width: 100%;
-    width: 80%;
-    border-radius: 14px;
-  }
-
-  .blogposts-area .blogpost-bubble {
-    width: 100%;
-    text-align: center;
-  }
-
-  .blogposts-area .blogpost-bubble-content {
-    width: 90%;
-    margin: auto;
   }
 }
 </style>
