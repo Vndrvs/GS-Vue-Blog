@@ -239,6 +239,7 @@ export default {
 @media (max-width: 900px) {
   .main-wrapper {
     .projects-area {
+      padding: 0 16px;
       .box-container {
         display: flex !important;
         flex-direction: column;
