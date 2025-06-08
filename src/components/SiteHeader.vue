@@ -86,7 +86,6 @@ onUnmounted(() => {
 const emit = defineEmits(['toggle-sidebar'])
 
 const onToggleSidebar = () => {
-  isRotated.value = !isRotated.value
   emit('toggle-sidebar')
 }
 </script>

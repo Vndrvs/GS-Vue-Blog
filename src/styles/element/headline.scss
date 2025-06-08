@@ -4,25 +4,30 @@
 }
 
 .headline {
-  margin-left: 20px;
-
   & a,
   .el-breadcrumb__inner,
   .el-page-header__title {
     @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
+    padding: 0 6px;
+  }
+
+  & .el-page-header__left {
+    margin: 0;
   }
 
   & .el-breadcrumb__inner {
     transition: none !important;
   }
 
-  & .custom-breadcrumb-item {
+  & .custom-breadcrumb-item1 {
     border-left: 1px solid var(--text-clr);
-    padding: 0 10px;
+  }
+
+  & .custom-breadcrumb-item2 {
+    border-left: 1px solid var(--text-clr);
   }
 
   & .el-page-header__title {
-    padding-right: 10px;
   }
 
   & .el-divider--vertical {
@@ -32,6 +37,42 @@
 
   & .el-breadcrumb__separator {
     display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .headline {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+    text-align: center !important;
+
+    .el-page-header {
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      margin: 16px 0 10px 0;
+      color: var(--text-clr);
+    }
+
+    h4 {
+      color: var(--text-clr);
+      font-weight: 400;
+    }
+
+    .el-divider.el-divider--vertical {
+      border-left: 1.5px solid var(--text-clr) !important;
+      background-color: transparent !important;
+      margin: 0 8px !important;
+    }
+
+    .spec-title {
+      @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
+    }
   }
 }
 
@@ -48,14 +89,11 @@
     .el-breadcrumb__inner,
     .el-page-header__title {
       @include font-style(var(--body-font), 400, 14px, 1.4, none, var(--text-clr) !important);
+      padding: 0 10px;
     }
 
     & .el-breadcrumb__inner {
       transition: none !important;
-    }
-
-    & :deep(.el-divider.el-divider--vertical) {
-      border-left: 1.5px solid var(--text-clr) !important;
     }
 
     & h4 {
@@ -80,7 +118,14 @@
       margin: 5px;
     }
 
-    & .custom-breadcrumb-item {
+    & .custom-breadcrumb-item1 {
+      border-left: none !important;
+      display: none !important;
+    }
+
+    & .custom-breadcrumb-item1,
+    .custom-breadcrumb-item2 {
+      max-width: 140px;
       overflow: hidden;
       display: inline-block;
       text-overflow: ellipsis;

@@ -1,13 +1,13 @@
 <template>
   <div class="main-wrapper">
-    <div class="headline">
+    <div class="headline" v-if="post">
       <el-page-header @back="goBackUsingBack">
         <template #content>
           <el-breadcrumb class="custom-breadcrumb" separator="">
-            <el-breadcrumb-item class="custom-breadcrumb-item" id="route">
+            <el-breadcrumb-item class="custom-breadcrumb-item1" id="route">
               <a @click.prevent="goToHome">Homepage</a>
             </el-breadcrumb-item>
-            <el-breadcrumb-item class="custom-breadcrumb-item">
+            <el-breadcrumb-item class="custom-breadcrumb-item2">
               {{ post.Title }}
             </el-breadcrumb-item>
           </el-breadcrumb>
@@ -257,50 +257,10 @@ export default {
     }
   }
 }
-
 @media (max-width: 900px) {
   .main-wrapper {
-    margin: 0 auto;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    justify-items: center !important;
-    .headline {
-      width: 100%;
-      display: flex !important;
-      flex-direction: column;
-      align-items: center !important;
-      text-align: center !important;
-
-      .el-page-header {
-        width: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-        margin: 16px 0 10px 0;
-        color: var(--text-clr);
-      }
-
-      h4 {
-        color: var(--text-clr);
-        font-weight: 400;
-      }
-
-      .el-divider.el-divider--vertical {
-        border-left: 1.5px solid var(--text-clr) !important;
-        background-color: transparent !important;
-        margin: 0 8px !important;
-      }
-
-      .spec-title {
-        @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
-      }
-    }
-
     .content-container {
-      margin: 0 0 0px 0 !important;
+      margin: 0 0 20px 0 !important;
       @include responsive-text(auto, break-word, auto, visible, none);
 
       .cover-image {

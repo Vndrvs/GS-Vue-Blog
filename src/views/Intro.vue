@@ -3,8 +3,11 @@
     <div class="headline">
       <el-page-header @back="goBackUsingBack">
         <template #content>
-          <el-breadcrumb class="custom-breadcrumb" separator="/" />
-          <h2 class="spec-title">Projects</h2>
+          <el-breadcrumb class="custom-breadcrumb" separator="">
+            <el-breadcrumb-item class="custom-breadcrumb-item" id="route">
+              <h2 class="spec-title">Man1fest</h2>
+            </el-breadcrumb-item>
+          </el-breadcrumb>
         </template>
       </el-page-header>
     </div>
@@ -143,15 +146,11 @@ h1 {
     opacity: 0;
   }
 }
+* {
+}
 
 @media (max-width: 900px) {
   .headline {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-
     .el-page-header {
       width: 100%;
       display: flex;
@@ -161,10 +160,16 @@ h1 {
       text-align: center;
       margin: 16px 0 10px 0;
       color: var(--text-clr);
+      padding: 0 !important;
     }
 
-    .custom-breadcrumb {
+    .custom-breadcrumb-item {
+      padding: 0 !important;
       justify-content: center;
+    }
+    .el-breadcrumb__item {
+      padding: 0 !important;
+      display: none !important;
     }
 
     h4 {
@@ -180,6 +185,10 @@ h1 {
 
     .spec-title {
       @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
+      padding: none !important;
+    }
+    #route {
+      padding: none !important;
     }
   }
   .typewriter-box {
