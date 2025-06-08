@@ -134,7 +134,7 @@ const onToggleSidebar = () => {
         width: 4em;
         height: 4em;
         border-radius: 50%;
-        border: 3px solid var(--text-clr);
+        border: 2px solid var(--text-clr);
         cursor: pointer;
         pointer-events: auto;
         transition: right 0.3s ease;

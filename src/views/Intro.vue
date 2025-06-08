@@ -79,11 +79,18 @@ export default {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   .headline {
     .el-page-header {
       color: var(--text-clr);
       margin: 16px 0 10px 0;
+    }
+
+    .el-divider--vertical {
+      color: var(--text-clr) !important;
+      border: 1px solid black !important;
     }
 
     .spec-title {
@@ -93,7 +100,7 @@ export default {
 }
 
 .typewriter-box {
-  margin-top: 30%;
+  min-height: 70svh;
   display: flex;
   justify-content: center;
   align-items: center;

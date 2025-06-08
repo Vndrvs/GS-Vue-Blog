@@ -5,7 +5,7 @@
         <el-page-header @back="goBackUsingBack">
           <template #content>
             <el-breadcrumb class="custom-breadcrumb" separator="|">
-              <el-breadcrumb-item class="custom-breadcrumb" id="route">
+              <el-breadcrumb-item class="custom-breadcrumb-item" id="route">
                 <a @click.prevent="goToHome">Homepage</a>
               </el-breadcrumb-item>
               <el-breadcrumb-item class="custom-breadcrumb-item">

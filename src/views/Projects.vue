@@ -3,8 +3,11 @@
     <div class="headline">
       <el-page-header @back="goBackUsingBack">
         <template #content>
-          <el-breadcrumb class="custom-breadcrumb" separator="/" />
-          <h2 class="spec-title">Projects</h2>
+          <el-breadcrumb class="custom-breadcrumb" separator="">
+            <el-breadcrumb-item class="custom-breadcrumb-item" id="route">
+              <a>Homepage</a>
+            </el-breadcrumb-item>
+          </el-breadcrumb>
         </template>
       </el-page-header>
     </div>
@@ -249,13 +252,7 @@ export default {
 
 @media (max-width: 900px) {
   .main-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-
     .projects-area {
-      padding: 0 16px;
       .box-container {
         display: flex !important;
         flex-direction: column;
@@ -263,17 +260,11 @@ export default {
         justify-content: center;
       }
       .project-container {
-        @include container-style(
-          flex !important,
-          0 30px 0 30px,
-          12px 12px 18px 12px !important,
-          100% !important,
-          300px !important
-        );
+        @include container-style(flex, 0, 12px 12px 18px 12px, 90%, 300px);
         flex-direction: column !important;
-        max-width: 200px !important;
-        border: 1px solid var(--text-clr) !important;
-        border-radius: 20px !important;
+        justify-items: center;
+
+        border-radius: 25px !important;
 
         & .project-bubble {
           width: 170px !important;

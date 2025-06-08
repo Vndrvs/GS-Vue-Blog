@@ -95,7 +95,7 @@ const goToRandomPost = () => {
     position: absolute;
     top: -100px;
     right: 0;
-    width: 3px;
+    width: 2px;
     height: 0%;
     background-color: var(--text-clr);
     transition: height 0.3s ease 0.4s;
