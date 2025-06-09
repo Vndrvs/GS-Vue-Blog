@@ -18,13 +18,13 @@
     <div v-if="loading">Loading...</div>
     <div v-if="error">Error: {{ error.message }}</div>
     <div v-if="post" class="content-container">
-      <img
-        v-if="post.Cover"
-        class="cover-image"
-        :src="post.Cover.url"
-        :alt="post.Cover.alternativeText"
-      />
       <div class="content-section">
+        <img
+          v-if="post.Cover"
+          class="cover-image"
+          :src="post.Cover.url"
+          :alt="post.Cover.alternativeText"
+        />
         <h1 id="title">{{ post.Title }}</h1>
         <h2 id="heading">{{ post.H1 }}</h2>
         <h4 id="published-date">Published: {{ formatDate(post.publishedAt) }}</h4>
@@ -67,11 +67,7 @@
           :src="post.pic5.url"
           :alt="post.pic5.alternativeText"
         />
-        <p
-          v-if="parseContent(post.Content6)"
-          class="content-text"
-          v-html="parseContent(post.Content6)"
-        ></p>
+        <p class="content-text" v-html="parseContent(post.Content6)"></p>
       </div>
     </div>
   </div>
@@ -81,7 +77,7 @@
 import { ref, watchEffect, watch } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ONE_POST } from '@/graphql/getOnePost.js'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useNavigation } from '../utils/navigation.js'
 
 export default {
@@ -93,13 +89,14 @@ export default {
   },
   setup(props) {
     const route = useRoute()
+    const router = useRouter()
     const documentId = ref(route.params.id)
 
     const { goBackUsingBack, goToHome } = useNavigation()
     const post = ref(null)
 
     const { result, loading, error, refetch } = useQuery(GET_ONE_POST, {
-      documentId: props.id,
+      documentId: props.id, // Use the prop directly
       fetchPolicy: 'network-only',
     })
 
@@ -168,13 +165,27 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@/styles/element/mixins.scss' as *;
 
-.published-date {
-  padding: 0px !important;
+pre {
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1.5rem 0;
 }
 
+.custom-code {
+  display: block;
+  line-height: 1.4;
+  background-color: #272727;
+  color: white;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 80%;
+  white-space: pre-wrap;
+}
 .main-wrapper {
   max-width: 75%;
   display: flex;
