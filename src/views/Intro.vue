@@ -4,8 +4,8 @@
       <el-page-header @back="goBackUsingBack">
         <template #content>
           <el-breadcrumb class="custom-breadcrumb" separator="">
-            <el-breadcrumb-item class="custom-breadcrumb-item" id="route">
-              <h2 class="spec-title">Man1fest</h2>
+            <el-breadcrumb-item class="custom-breadcrumb-item2" id="route">
+              <a @click.prevent="goToHome">Man1fest</a>
             </el-breadcrumb-item>
           </el-breadcrumb>
         </template>
@@ -85,47 +85,41 @@ export default {
   align-items: center;
   justify-content: center;
 
-  .headline {
-    .el-page-header {
+  & .headline {
+    & .el-page-header {
+      margin-left: 20px;
+    }
+  }
+
+  & .typewriter-box {
+    min-height: 70svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+    & .typewriter-text {
+      font-size: 2.5rem;
+      font-family: var(--heading-font);
+      font-weight: 400;
       color: var(--text-clr);
-      margin: 16px 0 10px 0;
+      text-transform: none;
     }
 
-    .el-divider--vertical {
-      color: var(--text-clr) !important;
-      border: 1px solid black !important;
+    & .caret::after {
+      content: '|';
+      display: inline-block;
+      margin-left: 3px;
+      animation: blink-caret 1s steps(1) infinite;
+      color: var(--text-clr);
     }
-
-    .spec-title {
-      @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr));
+    & h1 {
+      animation: softFadeIn 0.6s ease forwards;
     }
   }
 }
 
-.typewriter-box {
-  min-height: 70svh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-}
-
-.typewriter-text {
-  font-size: 2.5rem;
-  font-family: var(--heading-font);
-  font-weight: 400;
-  color: var(--text-clr);
-  text-transform: none;
-}
-
-.caret::after {
-  content: '|';
-  display: inline-block;
-  margin-left: 3px;
-  animation: blink-caret 1s steps(1) infinite;
-  color: var(--text-clr);
-}
 @keyframes softFadeIn {
   from {
     opacity: 0;
@@ -137,66 +131,27 @@ export default {
   }
 }
 
-h1 {
-  animation: softFadeIn 0.6s ease forwards;
-}
-
 @keyframes blink-caret {
   50% {
     opacity: 0;
   }
 }
-* {
-}
 
 @media (max-width: 900px) {
-  .headline {
-    .el-page-header {
-      width: 100%;
+  .main-wrapper {
+    & .headline {
+      & .el-page-header {
+        margin-left: 25px;
+      }
+    }
+
+    & .typewriter-box {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      justify-content: center;
+      flex-direction: column;
       text-align: center;
-      margin: 16px 0 10px 0;
-      color: var(--text-clr);
-      padding: 0 !important;
     }
-
-    .custom-breadcrumb-item {
-      padding: 0 !important;
-      justify-content: center;
-    }
-    .el-breadcrumb__item {
-      padding: 0 !important;
-      display: none !important;
-    }
-
-    h4 {
-      color: var(--text-clr);
-      font-weight: 400;
-    }
-
-    .el-divider.el-divider--vertical {
-      border-left: 1.5px solid var(--text-clr) !important;
-      background-color: transparent !important;
-      margin: 0 8px !important;
-    }
-
-    .spec-title {
-      @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
-      padding: none !important;
-    }
-    #route {
-      padding: none !important;
-    }
-  }
-  .typewriter-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
   }
 }
 </style>

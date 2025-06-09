@@ -1,14 +1,14 @@
 <template>
   <div class="main-wrapper">
     <div class="top-section">
-      <div class="headline">
+      <div class="headline" v-if="project">
         <el-page-header @back="goBackUsingBack">
           <template #content>
             <el-breadcrumb class="custom-breadcrumb" separator="|">
-              <el-breadcrumb-item class="custom-breadcrumb-item" id="route">
+              <el-breadcrumb-item class="custom-breadcrumb-item1" id="route">
                 <a @click.prevent="goToHome">Homepage</a>
               </el-breadcrumb-item>
-              <el-breadcrumb-item class="custom-breadcrumb-item">
+              <el-breadcrumb-item class="custom-breadcrumb-item2">
                 {{ project.projectTitle }}
               </el-breadcrumb-item>
             </el-breadcrumb>
@@ -156,7 +156,7 @@ export default {
 .main-wrapper {
   max-width: 80%;
 
-  .top-section {
+  & .top-section {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -164,25 +164,7 @@ export default {
     max-width: 80%;
   }
 
-  .headline {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-    .el-page-header {
-      width: 100%;
-      max-width: 1000px;
-      margin: 16px 0 10px 0;
-      color: var(--text-clr);
-    }
-
-    h4 {
-      color: var(--text-clr);
-      font-weight: 400;
-    }
-  }
-
-  .project-content-container {
+  & .project-content-container {
     & .cover-image {
       margin: 3%;
       width: 45%;
@@ -214,7 +196,7 @@ export default {
     }
   }
 
-  .blogposts-area {
+  & .blogposts-area {
     width: 90%;
     margin: 5% auto 7% auto;
 
@@ -223,12 +205,12 @@ export default {
       @include font-style(var(--heading-font), 700, 2.2rem, 100%, none, var(--text-clr));
     }
 
-    .card-container {
-      column-gap: 50px;
+    & .card-container {
+      column-gap: 90px;
       row-gap: 5vh;
     }
 
-    .blogposts-container {
+    & .blogposts-container {
       .blogpost-link {
         text-decoration: none;
         margin: auto;

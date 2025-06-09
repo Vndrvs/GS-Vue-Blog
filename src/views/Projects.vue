@@ -107,9 +107,10 @@ export default {
   width: 80%;
 
   .headline {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
-    align-items: center !important;
+    align-items: center;
+    margin-left: 20px;
   }
 
   .projects-area {
@@ -223,6 +224,9 @@ export default {
 
 @media (max-width: 900px) {
   .main-wrapper {
+    .headline {
+      margin-left: 6px;
+    }
     .projects-area {
       .box-container {
         display: flex !important;

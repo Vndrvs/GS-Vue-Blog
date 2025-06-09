@@ -77,7 +77,7 @@
 import { ref, watchEffect, watch } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ONE_POST } from '@/graphql/getOnePost.js'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useNavigation } from '../utils/navigation.js'
 
 export default {
