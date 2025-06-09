@@ -89,7 +89,6 @@ export default {
   },
   setup(props) {
     const route = useRoute()
-    const router = useRouter()
     const documentId = ref(route.params.id)
 
     const { goBackUsingBack, goToHome } = useNavigation()

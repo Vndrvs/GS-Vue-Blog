@@ -4,8 +4,8 @@
       <el-page-header @back="goBackUsingBack">
         <template #content>
           <el-breadcrumb class="custom-breadcrumb" separator="">
-            <el-breadcrumb-item class="custom-breadcrumb-item" id="route">
-              <a>Homepage</a>
+            <el-breadcrumb-item class="custom-breadcrumb-item2" id="route">
+              <a @click.prevent="goToHome">Projects</a>
             </el-breadcrumb-item>
           </el-breadcrumb>
         </template>
@@ -107,38 +107,9 @@ export default {
   width: 80%;
 
   .headline {
-    width: 100%;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
-    align-items: center;
-    .el-page-header {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-    }
-    & h4 {
-      color: var(--text-clr);
-      font-weight: 400;
-    }
-
-    & .el-divider.el-divider--vertical {
-      border-left: 1.5px solid var(--text-clr) !important;
-      background-color: transparent !important;
-      margin: 0 8px !important;
-      column-gap: 0px;
-    }
-    & .el-page-header {
-      color: var(--text-clr);
-      margin: 16px 0 10px 0;
-      column-gap: 0px;
-      row-gap: 0px;
-      gap: 0px;
-    }
-
-    .spec-title {
-      @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
-    }
+    align-items: center !important;
   }
 
   .projects-area {

@@ -1,18 +1,24 @@
 @use '@/styles/element/mixins.scss' as *;
 
-* {
-}
-
 .headline {
+  margin: 10px;
+
   & a,
   .el-breadcrumb__inner,
   .el-page-header__title {
     @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
-    padding: 0 6px;
   }
 
   & .el-page-header__left {
-    margin: 0;
+    margin-right: 20px;
+  }
+
+  & .el-page-header__title {
+    padding: 0 10px;
+  }
+
+  & .el-breadcrumb__inner {
+    padding: 0 10px;
   }
 
   & .el-breadcrumb__inner {
@@ -25,9 +31,6 @@
 
   & .custom-breadcrumb-item2 {
     border-left: 1px solid var(--text-clr);
-  }
-
-  & .el-page-header__title {
   }
 
   & .el-divider--vertical {
@@ -55,7 +58,6 @@
       align-items: center !important;
       justify-content: center !important;
       text-align: center !important;
-      margin: 16px 0 10px 0;
       color: var(--text-clr);
     }
 
@@ -69,10 +71,6 @@
       background-color: transparent !important;
       margin: 0 8px !important;
     }
-
-    .spec-title {
-      @include font-style(var(--body-font), 400, 16px, 1.4, none, var(--text-clr) !important);
-    }
   }
 }
 
@@ -83,14 +81,6 @@
     justify-content: center;
     justify-items: center;
     text-align: center;
-    margin: auto;
-
-    & a,
-    .el-breadcrumb__inner,
-    .el-page-header__title {
-      @include font-style(var(--body-font), 400, 14px, 1.4, none, var(--text-clr) !important);
-      padding: 0 10px;
-    }
 
     & .el-breadcrumb__inner {
       transition: none !important;
@@ -98,6 +88,17 @@
 
     & h4 {
       font-size: 16px;
+    }
+    & .custom-breadcrumb-item1,
+    .custom-breadcrumb-item2 {
+      max-width: 140px;
+      overflow: hidden;
+      display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--text-clr);
+      text-align: left;
+      pointer-events: none;
     }
   }
 }
@@ -110,29 +111,15 @@
     align-items: center !important;
     text-align: center !important;
 
-    & a {
-      display: none;
-    }
-
-    & .el-page-header__icon {
-      margin: 5px;
+    & a,
+    .el-breadcrumb__inner,
+    .el-page-header__title {
+      @include font-style(var(--body-font), 400, 14px, 1.4, none, var(--text-clr) !important);
     }
 
     & .custom-breadcrumb-item1 {
       border-left: none !important;
       display: none !important;
-    }
-
-    & .custom-breadcrumb-item1,
-    .custom-breadcrumb-item2 {
-      max-width: 140px;
-      overflow: hidden;
-      display: inline-block;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      color: var(--text-clr);
-      text-align: left;
-      pointer-events: none;
     }
   }
 }
