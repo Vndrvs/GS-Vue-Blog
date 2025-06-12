@@ -165,16 +165,13 @@ export default {
   }
 
   & .project-content-container {
-    & .cover-image {
-      margin: 3%;
-      width: 45%;
-      max-width: 400px;
-    }
-
     & h1,
     h2,
     p {
+      margin: 0 auto;
+      color: var(--text-clr);
       text-align: left;
+      line-height: 100%;
     }
 
     & h1 {
@@ -341,10 +338,16 @@ export default {
       }
     }
   }
+
   .project-content-container {
-    max-width: 90%;
-    margin: auto;
+    margin: 0 0 20px 0 !important;
     align-self: center;
+    @include responsive-text(auto, break-word, auto, visible, none);
+
+    & .cover-image {
+      margin-top: 3%;
+      width: 100% !important;
+    }
 
     & h1,
     h2,
@@ -375,40 +378,6 @@ export default {
       > * {
         margin-bottom: 0.8rem;
       }
-    }
-
-    & .cover-image {
-      margin: 3%;
-      width: 70%;
-      margin-left: 0;
-    }
-  }
-
-  .content-container {
-    @include responsive-text(auto, break-word, auto, visible, none);
-
-    & h1,
-    h2,
-    p {
-      color: var(--text-clr);
-      max-width: 80%;
-    }
-
-    & p {
-      line-height: 140%;
-    }
-
-    & h1 {
-      margin-top: 5%;
-      @include font-style(var(--heading-font), 800, 3rem, 100%, none, var(--text-clr));
-    }
-
-    & h2 {
-      @include font-style(var(--heading-font), 600, 2rem, 110%, none, var(--text-clr));
-    }
-
-    & .head-section {
-      color: var(--secondary-txt-clr);
     }
   }
 
